@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-hant">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="static/assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="static/assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>OmniWrench</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!--  Bootstrap core CSS     -->
+    <link href="static/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!--  Material Dashboard CSS    -->
+    <link href="static/assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
+    <!--  Fonts and icons   -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="static/assets/img/sidebar-1.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+            <div class="logo">
+                <a href="http://make.ralf.ren/omniwrench" class="simple-text">
+                    OmniWrench
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="dashboard">
+                            <i class="material-icons">dashboard</i>
+                            <p>儀表板</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="resource">
+                            <i class="material-icons">pie_chart</i>
+                            <p>資源</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="system">
+                            <i class="material-icons">dvr</i>
+                            <p>系統</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="network">
+                            <i class="material-icons">language</i>
+                            <p>網路</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="download">
+                            <i class="material-icons">cloud_download</i>
+                            <p>下載</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="./about.html">
+                            <i class="material-icons">info_outline</i>
+                            <p>關於</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"> 儀表板 </a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">cloud</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">主機名稱</p>
+                                    <h3 class="title">{{ oshostname }}</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">settings_ethernet</i> <span id=iplocal>正在獲取本機 IP 位址...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">settings_ethernet</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">訪客 IP</p>
+                                    <h3 class="title">{{ ipvisitor }}</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">location_on</i> <span id=iplocation>正在定位訪客...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="red">
+                                    <i class="material-icons">info_outline</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">作業系統</p>
+                                    <h3 class="title">{{ osfulldist }}</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">settings</i> {{ oskernel }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">access_time</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">上線時長</p>
+                                    <h3 class="title"><span id=timdays>-</span>天 <span id=timhours>-</span>小時 <span id=timminutes>-</span>分鈡</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">access_time</i> 剛剛更新
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="green">
+                                    <div class="ct-chart" id="CPUChart"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">CPU</h4>
+                                    <p class="category">
+                                        <span class="text-success"><span id=cpupercent>-</span>% </span> 利用率</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">memory</i> {{ cpuname }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="orange">
+                                    <div class="ct-chart" id="RAMChart"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">RAM</h4>
+                                    <p class="category">
+                                        <span class="text-success"><span id=rampercent>-</span>% </span> 佔用率</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">pie_chart_outlined</i> 共 <span id=ramtotal>-</span> MB，已使用 <span id=ramused>-</span> MB，剩餘 <span id=ramusable>-</span> MB
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="red">
+                                    <div class="ct-chart" id="StorageChart"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">存儲</h4>
+                                    <p class="category">
+                                        <span class="text-success"><span id=stopercent>-</span>% </span> 佔用率</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">pie_chart_outlined</i> 共 <span id=stototal>-</span> GB，已使用 <span id=stoused>-</span> GB，剩餘 <span id=stofree>-</span> GB
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <p class="copyright pull-left">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        <a href="https://ralf.ren">CYRO4S</a>，主題由 <a href="https://www.creative-tim.com">Creative Tim</a> 提供，遵循 MIT 授權。
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="static/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="static/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="static/assets/js/material.min.js" type="text/javascript"></script>
+<!--  Charts Plugin -->
+<script src="static/assets/js/chartist.min.js"></script>
+<!--  Dynamic Elements plugin -->
+<script src="static/assets/js/arrive.min.js"></script>
+<!--  PerfectScrollbar Library -->
+<script src="static/assets/js/perfect-scrollbar.jquery.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="static/assets/js/bootstrap-notify.js"></script>
+<!-- Material Dashboard javascript methods -->
+<script src="static/assets/js/material-dashboard.js?v=1.2.0"></script>
+<!-- Material Dashboard DEMO methods, don't include it in your project!
+<script src="static/assets/js/demo.js"></script>-->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        // Get local IP
+        $.ajax({
+          type: 'GET',
+          url: "/api/get_local_ip",
+          data: "",
+          dataType: 'json',
+          success: function(data) {
+            $('#iplocal').text(data.content);
+          },
+          error: function(xhr, err) {
+            $('#iplocal').text("錯誤：" + err);
+          }
+        });
+
+        // Get visitor location
+        $.ajax({
+          type: 'GET',
+          url: "/api/get_ip_location",
+          data: "",
+          dataType: 'json',
+          success: function(data) {
+            $('#iplocation').text(data.content);
+          },
+          error: function(xhr, err) {
+            $('#iplocation').text("錯誤：" + err);
+          }
+        });
+
+        // Auto refresh
+        setInterval(function(){
+
+          // Uptime
+          $.ajax({
+            type: 'GET',
+            url: "/api/get_uptime",
+            data: "",
+            dataType: 'json',
+            success: function(data) {
+              $('#timdays').text(data.days);
+              $('#timhours').text(data.hours);
+              $('#timminutes').text(data.minutes);
+            },
+            error: function(xhr, err) {
+              $('#timdays').text("錯誤：" + err);
+              $('#timhours').text("錯誤：" + err);
+              $('#timminutes').text("錯誤：" + err);
+            }
+          });
+
+          // CPU percent
+          $.ajax({
+            type: 'GET',
+            url: "/api/get_cpu_percent",
+            data: "",
+            dataType: 'json',
+            success: function(data) {
+              $('#cpupercent').text(data.content);
+            },
+            error: function(xhr, err) {
+              $('#cpupercent').text("錯誤：" + err);
+            }
+          });
+
+          // RAM info
+          $.ajax({
+            type: 'GET',
+            url: "/api/get_ram_info",
+            data: "",
+            dataType: 'json',
+            success: function(data) {
+              $('#rampercent').text(data.percent);
+              $('#ramtotal').text(data.total);
+              $('#ramused').text(data.realused);
+              $("#ramusable").text(data.usable);
+            },
+            error: function(xhr, err) {
+              $('#rampercent').text("錯誤：" + err);
+              $('#ramtotal').text("錯誤：" + err);
+              $('#ramused').text("錯誤：" + err);
+              $("#ramusable").text("錯誤：" + err);
+            }
+          });
+
+          // Stroage info
+          $.ajax({
+            type: 'GET',
+            url: "/api/get_stroage_info",
+            data: "",
+            dataType: 'json',
+            success: function(data) {
+              $('#stopercent').text(data.percent);
+              $('#stototal').text(data.total);
+              $('#stoused').text(data.used);
+              $("#stofree").text(data.free);
+            },
+            error: function(xhr, err) {
+              $('#stopercent').text("錯誤：" + err);
+              $('#stototal').text("錯誤：" + err);
+              $('#stoused').text("錯誤：" + err);
+              $("#stofree").text("錯誤：" + err);
+            }
+          });
+
+          // CPU Chart
+          $.ajax({
+            type: 'GET',
+            url: "/api/get_cpu_percents",
+            data: "",
+            dataType: 'json',
+            success: function(data) {
+              dataCPUChart = {
+                  labels: ['15s', '12s', '9s', '6s', '3s', '0s'],
+                  series: [
+                      data.content
+                  ]
+              };
+              optionsCPUChart = {
+                  lineSmooth: Chartist.Interpolation.cardinal({
+                      tension: 0
+                  }),
+                  low: 0,
+                  high: 125,
+                  showArea: true,
+                  chartPadding: {
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      left: 0
+                  },
+              }
+              var CPUChart = new Chartist.Line('#CPUChart', dataCPUChart, optionsCPUChart);
+            }
+          });
+
+          // RAM Chart
+          $.ajax({
+            type: 'GET',
+            url: "/api/get_ram_percents",
+            data: "",
+            dataType: 'json',
+            success: function(data) {
+              dataRAMChart = {
+                  labels: ['15s', '12s', '9s', '6s', '3s', '0s'],
+                  series: [
+                      data.content
+                  ]
+              };
+              optionsRAMChart = {
+                  lineSmooth: Chartist.Interpolation.cardinal({
+                      tension: 0
+                  }),
+                  low: 0,
+                  high: 125,
+                  showArea: true,
+                  chartPadding: {
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      left: 0
+                  }
+              }
+              var RAMChart = new Chartist.Line('#RAMChart', dataRAMChart, optionsRAMChart);
+            }
+          });
+
+          // Stroage Charts
+          $.ajax({
+            type: 'GET',
+            url: "/api/get_stroage_percents",
+            data: "",
+            dataType: 'json',
+            success: function(data) {
+              dataStroageChart = {
+                  labels: ['15s', '12s', '9s', '6s', '3s', '0s'],
+                  series: [
+                      data.content
+                  ]
+              };
+              optionsStroageChart = {
+                  lineSmooth: Chartist.Interpolation.cardinal({
+                      tension: 0
+                  }),
+                  low: 0,
+                  high: 125,
+                  showArea: true,
+                  chartPadding: {
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      left: 0
+                  }
+              }
+              var StroageChart = new Chartist.Line('#StorageChart', dataStroageChart, optionsStroageChart);
+            }
+          });
+
+        }, 3000);
+
+    });
+</script>
+
+</html>
