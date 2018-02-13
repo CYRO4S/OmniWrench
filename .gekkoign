@@ -1,5 +1,7 @@
+venv/
+env/
+templates/zh-hant/assets/
+templates/zh-hans/assets/
+templates/en-us/assets/
 util/__pycache__/
 util/__init__.pyc
-templates/assets/
-apt-install.txt
-requirements.txt
