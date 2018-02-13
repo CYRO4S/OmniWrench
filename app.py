@@ -98,7 +98,7 @@ def network():
 
 @app.route('/about')
 def about():
-    pass
+    return render_template("about.html")
 
 @app.route('/api/get_local_ip')
 def get_local_ip():
